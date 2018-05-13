@@ -15,8 +15,14 @@
 			min: 0,
 			max: 500,
 			values: [ 75, 300 ],
+			step: 10,   	<!-- It will give nice numbers when slider is moved -->
 			slide: function( event, ui ) {
-				$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+				
+			  if (ui.values[0] + 10 >= ui.values[1]) { <!-- This will prevent range slider handles overlapping. You can change 10 with any of your desired number -->
+				  return false;               	
+			  }	
+				
+			  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
 			}
 		});
 		$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
